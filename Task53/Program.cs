@@ -10,6 +10,9 @@ int columns = int.Parse(Console.ReadLine()!);
 
 int[,]array = GetArray(rows, columns,1,10);
 PrintArray(array);
+Console.WriteLine();
+PrintArray(NewArray(array));
+
 
 int[,] GetArray(int m, int n, int minValue, int maxValue)
 {
@@ -38,15 +41,21 @@ void PrintArray(int[,] inArray)
 
 int[,] NewArray(int[,] array)
 {
-    int[,] NewaArray = new int[array.GetLength(0), array.GetLength(1)];
-    for (int i = 0; i < array.GetLength(0); i++)
+    int[,] NewArray = new int[array.GetLength(0), array.GetLength(1)];
+    for (int i = 0; i < array.GetLength(0)-1; i++)
     {
-        for (int j=0; j< inArray.GetLength(1); j++)
+        for (int j=0; j< array.GetLength(1); j++)
         {
-            if((i!=0) || (i !=array.GetLength(0)-1))
+            if(i!=0)
             {
             NewArray[i,j] = array [i,j];
             }
+            else
+            {
+                NewArray[i,j] = array [array.GetLength(0) - 1,j];
+                NewArray[array.GetLength(0) - 1,j] = array[i,j];        
+            }
         }
     }
+    return NewArray;
 }
